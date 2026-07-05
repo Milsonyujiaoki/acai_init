@@ -1,0 +1,11 @@
+
+  # Weekly Class Schedule Dashboard
+
+  This is a code bundle for Weekly Class Schedule Dashboard. The original project is available at https://www.figma.com/design/Gkrmss6pAWExlW6T6TWeCt/Weekly-Class-Schedule-Dashboard.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
