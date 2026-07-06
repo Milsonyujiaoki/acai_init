@@ -1,0 +1,49 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Badge } from "./ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./ui/pagination";
+import { Search, Filter, Eye, Download } from "lucide-react";
+const mockClaims = [
+    { id: 'CLM-001', patientName: 'Sarah Johnson', claimType: 'Pre-Authorization', status: 'pending', dateFiled: '2024-01-15', amount: 2500 },
+    { id: 'CLM-002', patientName: 'Michael Chen', claimType: 'Reimbursement', status: 'approved', dateFiled: '2024-01-14', amount: 1800 },
+    { id: 'CLM-003', patientName: 'Emily Davis', claimType: 'Pre-Authorization', status: 'rejected', dateFiled: '2024-01-13', amount: 3200 },
+    { id: 'CLM-004', patientName: 'Robert Wilson', claimType: 'Reimbursement', status: 'approved', dateFiled: '2024-01-12', amount: 950 },
+    { id: 'CLM-005', patientName: 'Lisa Anderson', claimType: 'Pre-Authorization', status: 'pending', dateFiled: '2024-01-11', amount: 4100 },
+];
+export function ClaimsDashboard({ onViewClaim }) {
+    const [activeTab, setActiveTab] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const filteredClaims = mockClaims.filter(claim => {
+        const matchesTab = activeTab === 'all' || claim.status === activeTab;
+        const matchesSearch = claim.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            claim.id.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesTab && matchesSearch;
+    });
+    const totalClaims = mockClaims.length;
+    const pendingClaims = mockClaims.filter(c => c.status === 'pending').length;
+    const approvedClaims = mockClaims.filter(c => c.status === 'approved').length;
+    const rejectedClaims = mockClaims.filter(c => c.status === 'rejected').length;
+    const getStatusBadge = (status) => {
+        const variants = {
+            pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+            approved: 'bg-green-100 text-green-800 border-green-200',
+            rejected: 'bg-red-100 text-red-800 border-red-200',
+        };
+        return variants[status] || variants.pending;
+    };
+    return (_jsxs("div", { className: "space-y-6", children: [_jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6", children: [_jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { className: "pb-3", children: _jsx(CardTitle, { className: "text-sm font-medium text-slate-600", children: "Total Claims" }) }), _jsxs(CardContent, { children: [_jsx("div", { className: "text-2xl font-semibold text-slate-900", children: totalClaims }), _jsx("p", { className: "text-sm text-slate-600 mt-1", children: "All time" })] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { className: "pb-3", children: _jsx(CardTitle, { className: "text-sm font-medium text-slate-600", children: "Pending" }) }), _jsxs(CardContent, { children: [_jsx("div", { className: "text-2xl font-semibold text-yellow-600", children: pendingClaims }), _jsx("p", { className: "text-sm text-slate-600 mt-1", children: "Under review" })] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { className: "pb-3", children: _jsx(CardTitle, { className: "text-sm font-medium text-slate-600", children: "Approved" }) }), _jsxs(CardContent, { children: [_jsx("div", { className: "text-2xl font-semibold text-green-600", children: approvedClaims }), _jsx("p", { className: "text-sm text-slate-600 mt-1", children: "Processing payment" })] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { className: "pb-3", children: _jsx(CardTitle, { className: "text-sm font-medium text-slate-600", children: "Rejected" }) }), _jsxs(CardContent, { children: [_jsx("div", { className: "text-2xl font-semibold text-red-600", children: rejectedClaims }), _jsx("p", { className: "text-sm text-slate-600 mt-1", children: "Requires action" })] })] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { className: "border-b border-slate-100", children: _jsxs("div", { className: "flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0", children: [_jsx("div", { className: "flex space-x-1", children: [
+                                        { key: 'all', label: 'All Claims' },
+                                        { key: 'pending', label: 'Pending' },
+                                        { key: 'approved', label: 'Approved' },
+                                        { key: 'rejected', label: 'Rejected' },
+                                    ].map((tab) => (_jsx(Button, { variant: activeTab === tab.key ? "default" : "ghost", onClick: () => setActiveTab(tab.key), className: `px-4 py-2 rounded-lg transition-all ${activeTab === tab.key
+                                            ? "bg-blue-600 text-white shadow-sm"
+                                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"}`, children: tab.label }, tab.key))) }), _jsxs("div", { className: "flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2", children: [_jsxs("div", { className: "relative", children: [_jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" }), _jsx(Input, { placeholder: "Search claims...", value: searchTerm, onChange: (e) => setSearchTerm(e.target.value), className: "pl-10 w-full sm:w-64" })] }), _jsxs(Select, { children: [_jsxs(SelectTrigger, { className: "w-full sm:w-40", children: [_jsx(Filter, { className: "h-4 w-4 mr-2" }), _jsx(SelectValue, { placeholder: "Date Range" })] }), _jsxs(SelectContent, { children: [_jsx(SelectItem, { value: "week", children: "Last Week" }), _jsx(SelectItem, { value: "month", children: "Last Month" }), _jsx(SelectItem, { value: "quarter", children: "Last Quarter" })] })] }), _jsxs(Select, { children: [_jsx(SelectTrigger, { className: "w-full sm:w-40", children: _jsx(SelectValue, { placeholder: "Claim Type" }) }), _jsxs(SelectContent, { children: [_jsx(SelectItem, { value: "pre-auth", children: "Pre-Authorization" }), _jsx(SelectItem, { value: "reimbursement", children: "Reimbursement" })] })] })] })] }) }), _jsxs(CardContent, { className: "p-0", children: [_jsxs(Table, { children: [_jsx(TableHeader, { children: _jsxs(TableRow, { className: "bg-slate-50 border-b border-slate-100", children: [_jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Claim ID" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Patient Name" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Claim Type" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Status" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Date Filed" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Amount" }), _jsx(TableHead, { className: "font-medium text-slate-700 py-4 px-6", children: "Action" })] }) }), _jsx(TableBody, { children: filteredClaims.map((claim) => (_jsxs(TableRow, { className: "border-b border-slate-50 hover:bg-slate-50/50", children: [_jsx(TableCell, { className: "py-4 px-6 font-medium text-blue-600", children: claim.id }), _jsx(TableCell, { className: "py-4 px-6", children: claim.patientName }), _jsx(TableCell, { className: "py-4 px-6", children: claim.claimType }), _jsx(TableCell, { className: "py-4 px-6", children: _jsx(Badge, { className: `${getStatusBadge(claim.status)} border font-medium`, children: claim.status.charAt(0).toUpperCase() + claim.status.slice(1) }) }), _jsx(TableCell, { className: "py-4 px-6 text-slate-600", children: claim.dateFiled }), _jsxs(TableCell, { className: "py-4 px-6 font-medium", children: ["$", claim.amount.toLocaleString()] }), _jsx(TableCell, { className: "py-4 px-6", children: _jsxs("div", { className: "flex space-x-2", children: [_jsx(Button, { variant: "ghost", size: "sm", onClick: () => onViewClaim(claim.id), className: "text-blue-600 hover:text-blue-700 hover:bg-blue-50", children: _jsx(Eye, { className: "h-4 w-4" }) }), _jsx(Button, { variant: "ghost", size: "sm", className: "text-slate-600 hover:text-slate-700 hover:bg-slate-50", children: _jsx(Download, { className: "h-4 w-4" }) })] }) })] }, claim.id))) })] }), _jsxs("div", { className: "flex items-center justify-between px-6 py-4 border-t border-slate-100", children: [_jsxs("p", { className: "text-sm text-slate-600", children: ["Showing ", filteredClaims.length, " of ", totalClaims, " claims"] }), _jsx(Pagination, { children: _jsxs(PaginationContent, { children: [_jsx(PaginationItem, { children: _jsx(PaginationPrevious, { href: "#" }) }), _jsx(PaginationItem, { children: _jsx(PaginationLink, { href: "#", isActive: true, children: "1" }) }), _jsx(PaginationItem, { children: _jsx(PaginationLink, { href: "#", children: "2" }) }), _jsx(PaginationItem, { children: _jsx(PaginationNext, { href: "#" }) })] }) })] })] })] })] }));
+}
+//# sourceMappingURL=ClaimsDashboard.js.map

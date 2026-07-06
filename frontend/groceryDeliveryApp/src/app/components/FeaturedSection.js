@@ -1,0 +1,8 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+export function FeaturedSection() {
+    return (_jsx("div", { className: "bg-gradient-to-r from-green-50 to-blue-50 py-8", children: _jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-8 items-center", children: [_jsxs("div", { children: [_jsx(Badge, { className: "bg-green-100 text-green-800 mb-4", children: "Limited Time Offer" }), _jsx("h2", { className: "text-3xl font-bold mb-4", children: "Fresh Organic Produce" }), _jsx("p", { className: "text-lg text-gray-600 mb-6", children: "Get 20% off on all organic fruits and vegetables. Farm fresh, delivered to your door." }), _jsxs("div", { className: "flex space-x-4", children: [_jsx(Button, { size: "lg", className: "bg-green-600 hover:bg-green-700", children: "Shop Organic" }), _jsx(Button, { variant: "outline", size: "lg", children: "Learn More" })] })] }), _jsxs("div", { className: "relative", children: [_jsx(ImageWithFallback, { src: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop", alt: "Fresh organic produce", className: "rounded-lg shadow-lg w-full h-80 object-cover" }), _jsx(Badge, { className: "absolute top-4 right-4 bg-red-500 text-white text-lg px-3 py-2", children: "20% OFF" })] })] }) }) }));
+}
+//# sourceMappingURL=FeaturedSection.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"VehicleList.d.ts","sourceRoot":"","sources":["VehicleList.tsx"],"names":[],"mappings":"AAMA,UAAU,gBAAgB;IACxB,QAAQ,EAAE,GAAG,EAAE,CAAC;IAChB,eAAe,EAAE,MAAM,GAAG,IAAI,CAAC;IAC/B,eAAe,EAAE,CAAC,SAAS,EAAE,MAAM,KAAK,IAAI,CAAC;CAC9C;AAED,wBAAgB,WAAW,CAAC,EAAE,QAAQ,EAAE,eAAe,EAAE,eAAe,EAAE,EAAE,gBAAgB,OA2D3F"}

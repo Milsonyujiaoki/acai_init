@@ -1,0 +1,60 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
+import { ArrowLeft, Download, FileText, Calendar, User, MapPin, DollarSign, Clock, CheckCircle2 } from "lucide-react";
+// Mock claim data - in a real app this would be fetched based on claimId
+const mockClaimDetails = {
+    id: 'CLM-001',
+    status: 'approved',
+    patientName: 'Sarah Johnson',
+    age: 32,
+    gender: 'Female',
+    insuranceId: 'INS-789456123',
+    dateFiled: '2024-01-15',
+    dateApproved: '2024-01-17',
+    claimType: 'Pre-Authorization',
+    treatmentDate: '2024-01-20',
+    diagnosis: 'Arthroscopic knee surgery for meniscal tear',
+    hospitalName: 'St. Mary\'s Medical Center',
+    hospitalAddress: '1234 Health St, Medical City, MC 12345',
+    doctorName: 'Dr. Michael Rodriguez',
+    doctorRegistration: 'MR987654321',
+    specialization: 'Orthopedic Surgery',
+    estimatedCost: 2500,
+    approvedAmount: 2250,
+    diagnosisNotes: [
+        'ICD-10: M23.201 - Derangement of unspecified meniscus due to old tear',
+        'Patient experiencing pain and limited mobility',
+        'Conservative treatment unsuccessful',
+        'Surgical intervention recommended'
+    ],
+    documents: [
+        { name: 'MRI Scan Results.pdf', uploadDate: '2024-01-15', size: '2.3 MB' },
+        { name: 'Doctor Consultation Report.pdf', uploadDate: '2024-01-15', size: '1.1 MB' },
+        { name: 'Treatment Plan.pdf', uploadDate: '2024-01-15', size: '856 KB' },
+        { name: 'Patient X-ray.jpg', uploadDate: '2024-01-14', size: '1.8 MB' }
+    ],
+    statusHistory: [
+        { status: 'Filed', date: '2024-01-15 10:30 AM', description: 'Claim submitted successfully' },
+        { status: 'Under Review', date: '2024-01-16 02:15 PM', description: 'Medical team review initiated' },
+        { status: 'Additional Info Requested', date: '2024-01-16 04:45 PM', description: 'Requested additional MRI scan' },
+        { status: 'Under Review', date: '2024-01-17 09:00 AM', description: 'Review resumed with additional documentation' },
+        { status: 'Approved', date: '2024-01-17 03:30 PM', description: 'Pre-authorization approved for $2,250' }
+    ]
+};
+export function ClaimDetails({ claimId, onBack }) {
+    const claim = mockClaimDetails;
+    const getStatusColor = (status) => {
+        switch (status.toLowerCase()) {
+            case 'filed': return 'bg-blue-100 text-blue-800 border-blue-200';
+            case 'under review': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+            case 'approved': return 'bg-green-100 text-green-800 border-green-200';
+            case 'rejected': return 'bg-red-100 text-red-800 border-red-200';
+            default: return 'bg-gray-100 text-gray-800 border-gray-200';
+        }
+    };
+    return (_jsxs("div", { className: "space-y-6", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center space-x-4", children: [_jsxs(Button, { variant: "outline", onClick: onBack, className: "flex items-center space-x-2", children: [_jsx(ArrowLeft, { className: "h-4 w-4" }), _jsx("span", { children: "Back" })] }), _jsxs("div", { children: [_jsxs("h2", { className: "text-2xl font-semibold text-slate-900", children: ["Claim ", claim.id] }), _jsx("p", { className: "text-slate-600 mt-1", children: "Detailed claim information and status" })] })] }), _jsxs("div", { className: "flex items-center space-x-3", children: [_jsxs(Badge, { className: `${getStatusColor(claim.status)} border font-medium px-3 py-1`, children: [_jsx(CheckCircle2, { className: "h-4 w-4 mr-1" }), claim.status.charAt(0).toUpperCase() + claim.status.slice(1)] }), _jsxs(Button, { variant: "outline", className: "flex items-center space-x-2", children: [_jsx(Download, { className: "h-4 w-4" }), _jsx("span", { children: "Download PDF" })] })] })] }), _jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-6", children: [_jsxs("div", { className: "lg:col-span-2 space-y-6", children: [_jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "text-lg text-slate-900 flex items-center space-x-2", children: [_jsx(FileText, { className: "h-5 w-5" }), _jsx("span", { children: "Claim Overview" })] }) }), _jsxs(CardContent, { className: "space-y-4", children: [_jsxs("div", { className: "grid grid-cols-2 gap-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Claim Type" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.claimType })] }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Date Filed" }), _jsx("p", { className: "font-medium text-slate-900", children: new Date(claim.dateFiled).toLocaleDateString() })] })] }), _jsxs("div", { className: "grid grid-cols-2 gap-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Estimated Cost" }), _jsxs("p", { className: "text-lg font-semibold text-slate-900", children: ["$", claim.estimatedCost.toLocaleString()] })] }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Approved Amount" }), _jsxs("p", { className: "text-lg font-semibold text-green-600", children: ["$", claim.approvedAmount.toLocaleString()] })] })] }), claim.status === 'approved' && (_jsx("div", { className: "p-4 bg-green-50 border border-green-200 rounded-lg", children: _jsxs("div", { className: "flex items-start space-x-3", children: [_jsx(CheckCircle2, { className: "h-5 w-5 text-green-600 mt-0.5" }), _jsxs("div", { children: [_jsx("h4", { className: "font-medium text-green-800", children: "Pre-Authorization Approved" }), _jsxs("p", { className: "text-sm text-green-700 mt-1", children: ["Your pre-authorization has been approved for $", claim.approvedAmount.toLocaleString(), ". You can now proceed with the treatment."] }), _jsxs("p", { className: "text-sm text-green-700 mt-1", children: ["Approved on: ", new Date(claim.dateApproved).toLocaleDateString()] })] })] }) }))] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "text-lg text-slate-900 flex items-center space-x-2", children: [_jsx(User, { className: "h-5 w-5" }), _jsx("span", { children: "Patient Information" })] }) }), _jsx(CardContent, { children: _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: [_jsxs("div", { className: "space-y-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Full Name" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.patientName })] }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Age" }), _jsxs("p", { className: "font-medium text-slate-900", children: [claim.age, " years"] })] })] }), _jsxs("div", { className: "space-y-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Gender" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.gender })] }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Insurance ID" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.insuranceId })] })] })] }) })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "text-lg text-slate-900 flex items-center space-x-2", children: [_jsx(Calendar, { className: "h-5 w-5" }), _jsx("span", { children: "Treatment Details" })] }) }), _jsxs(CardContent, { className: "space-y-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Treatment Date" }), _jsx("p", { className: "font-medium text-slate-900", children: new Date(claim.treatmentDate).toLocaleDateString() })] }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Diagnosis" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.diagnosis })] }), _jsx(Separator, {}), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Hospital/Clinic" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.hospitalName }), _jsxs("p", { className: "text-sm text-slate-500 mt-1 flex items-start space-x-1", children: [_jsx(MapPin, { className: "h-4 w-4 mt-0.5" }), _jsx("span", { children: claim.hospitalAddress })] })] }), _jsx(Separator, {}), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-slate-600", children: "Attending Doctor" }), _jsx("p", { className: "font-medium text-slate-900", children: claim.doctorName }), _jsxs("p", { className: "text-sm text-slate-500", children: [claim.specialization, " \u2022 Registration: ", claim.doctorRegistration] })] })] })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { className: "text-lg text-slate-900", children: "Diagnosis Notes" }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-3", children: claim.diagnosisNotes.map((note, index) => (_jsx("div", { className: "p-3 bg-slate-50 rounded-lg border border-slate-200", children: _jsx("p", { className: "text-sm text-slate-700", children: note }) }, index))) }) })] }), _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { className: "text-lg text-slate-900", children: "Supporting Documents" }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-3", children: claim.documents.map((doc, index) => (_jsxs("div", { className: "flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200", children: [_jsxs("div", { className: "flex items-center space-x-3", children: [_jsx(FileText, { className: "h-5 w-5 text-blue-500" }), _jsxs("div", { children: [_jsx("p", { className: "font-medium text-slate-700", children: doc.name }), _jsxs("p", { className: "text-sm text-slate-500", children: ["Uploaded: ", new Date(doc.uploadDate).toLocaleDateString(), " \u2022 ", doc.size] })] })] }), _jsx(Button, { variant: "ghost", size: "sm", className: "text-blue-600 hover:text-blue-700 hover:bg-blue-50", children: _jsx(Download, { className: "h-4 w-4" }) })] }, index))) }) })] })] }), _jsx("div", { className: "lg:col-span-1", children: _jsxs(Card, { className: "bg-white border border-slate-200 rounded-xl shadow-sm sticky top-6", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "text-lg text-slate-900 flex items-center space-x-2", children: [_jsx(Clock, { className: "h-5 w-5" }), _jsx("span", { children: "Status History" })] }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-4", children: claim.statusHistory.map((entry, index) => (_jsxs("div", { className: "flex items-start space-x-3", children: [_jsx("div", { className: `flex-shrink-0 w-3 h-3 rounded-full mt-2 ${index === 0 ? 'bg-green-500' : 'bg-slate-300'}` }), _jsxs("div", { className: "flex-1 min-w-0", children: [_jsx("p", { className: "font-medium text-slate-900", children: entry.status }), _jsx("p", { className: "text-sm text-slate-600", children: entry.description }), _jsx("p", { className: "text-xs text-slate-500 mt-1", children: entry.date }), index < claim.statusHistory.length - 1 && (_jsx("div", { className: "w-px h-4 bg-slate-200 ml-1.5 mt-2" }))] })] }, index))) }) })] }) })] })] }));
+}
+//# sourceMappingURL=ClaimDetails.js.map

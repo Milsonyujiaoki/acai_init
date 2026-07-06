@@ -1,0 +1,45 @@
+import { useState, useMemo } from 'react';
+import { Product, FilterState, BrandCount } from '../types/product';
+import { luxuryBrands } from '../data/products';
+const initialFilters = {
+    priceRange: [0, 300],
+    selectedBrands: []
+};
+export function useProductFilters(products) {
+    const [filters, setFilters] = useState(initialFilters);
+    const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+            // Price filter
+            if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
+                return false;
+            }
+            // Brand filter
+            if (filters.selectedBrands.length > 0 && !filters.selectedBrands.includes(product.brand)) {
+                return false;
+            }
+            return true;
+        });
+    }, [products, filters]);
+    const brandCounts = useMemo(() => {
+        return luxuryBrands.map(brand => {
+            const count = products.filter(product => {
+                // Count products that match current price filter but ignore brand filter
+                const matchesPrice = product.price >= filters.priceRange[0] &&
+                    product.price <= filters.priceRange[1];
+                return matchesPrice && product.brand === brand;
+            }).length;
+            return { brand, count };
+        });
+    }, [products, filters.priceRange]);
+    const resetFilters = () => {
+        setFilters(initialFilters);
+    };
+    return {
+        filters,
+        setFilters,
+        filteredProducts,
+        brandCounts,
+        resetFilters
+    };
+}
+//# sourceMappingURL=useProductFilters.js.map

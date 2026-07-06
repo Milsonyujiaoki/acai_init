@@ -1,0 +1,1 @@
+{"version":3,"file":"ProductCard.d.ts","sourceRoot":"","sources":["ProductCard.tsx"],"names":[],"mappings":"AAKA,OAAO,EAAE,OAAO,EAAE,MAAM,OAAO,CAAC;AAEhC,UAAU,gBAAgB;IACxB,OAAO,EAAE,OAAO,CAAC;IACjB,WAAW,EAAE,CAAC,OAAO,EAAE,OAAO,KAAK,IAAI,CAAC;CACzC;AAED,wBAAgB,WAAW,CAAC,EAAE,OAAO,EAAE,WAAW,EAAE,EAAE,gBAAgB,OAiErE"}

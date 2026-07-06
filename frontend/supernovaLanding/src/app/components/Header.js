@@ -1,0 +1,6 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import exampleImage from 'figma:asset/c387e7c747d18745266fc5adee185ce78b7c4b0b.png';
+export function Header() {
+    return (_jsx("header", { className: "fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm", children: _jsx("div", { className: "container mx-auto px-6 py-6", children: _jsxs("div", { className: "flex items-center justify-between", children: [_jsx("div", { className: "text-xl font-medium text-black", children: "Supernova" }), _jsxs("nav", { className: "hidden md:flex items-center space-x-8", children: [_jsx("a", { href: "#", className: "text-gray-600 hover:text-black transition-colors text-sm", children: "Home" }), _jsx("a", { href: "#", className: "text-gray-600 hover:text-black transition-colors text-sm", children: "About" }), _jsx("a", { href: "#", className: "text-gray-600 hover:text-black transition-colors text-sm", children: "Services" }), _jsx("a", { href: "#", className: "text-gray-600 hover:text-black transition-colors text-sm", children: "Portfolio" }), _jsx("a", { href: "#", className: "text-gray-600 hover:text-black transition-colors text-sm", children: "Contact" })] }), _jsx("button", { className: "bg-black text-white px-6 py-2 rounded-md text-sm hover:bg-gray-800 transition-colors", children: "Get Started" })] }) }) }));
+}
+//# sourceMappingURL=Header.js.map

@@ -1,0 +1,134 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Badge } from './ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Calendar } from './ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Progress } from './ui/progress';
+import { DollarSign, TrendingUp, TrendingDown, BarChart3, PieChart, Calendar as CalendarIcon, Download, FileText, Filter, Search, RefreshCw, ArrowUp, ArrowDown, Target, Truck, Plane, Ship, Users, Route as RouteIcon, AlertCircle } from 'lucide-react';
+const revenueData = {
+    overview: {
+        totalRevenue: 2450000,
+        monthlyGrowth: 8.2,
+        avgRevenuePerTrip: 4850,
+        profitMargin: 24.5,
+        yearlyTarget: 3200000,
+        targetProgress: 76.6
+    },
+    byTransportMode: [
+        { mode: 'Road Transport', revenue: 1225000, percentage: 50, growth: 12.3, trips: 342, avgRevenue: 3584 },
+        { mode: 'Air Transport', revenue: 892500, percentage: 36.4, growth: -2.1, trips: 89, avgRevenue: 10028 },
+        { mode: 'Sea Transport', revenue: 332500, percentage: 13.6, growth: 18.7, trips: 24, avgRevenue: 13854 }
+    ],
+    byRoute: [
+        { route: 'NY-Boston Express', revenue: 425000, trips: 156, efficiency: 94.2, profitMargin: 28.5 },
+        { route: 'Chicago-Miami Air', revenue: 356000, trips: 45, efficiency: 97.1, profitMargin: 22.8 },
+        { route: 'Seattle-Tokyo Ocean', revenue: 298000, trips: 18, efficiency: 89.3, profitMargin: 31.2 },
+        { route: 'LA-Denver Road', revenue: 187000, trips: 89, efficiency: 91.7, profitMargin: 25.1 }
+    ],
+    monthlyTrend: [
+        { month: 'Jan', revenue: 185000, trips: 45, profit: 46250 },
+        { month: 'Feb', revenue: 192000, trips: 48, profit: 48000 },
+        { month: 'Mar', revenue: 205000, trips: 52, profit: 51250 },
+        { month: 'Apr', revenue: 198000, trips: 47, profit: 49500 },
+        { month: 'May', revenue: 212000, trips: 54, profit: 53000 },
+        { month: 'Jun', revenue: 225000, trips: 56, profit: 56250 },
+        { month: 'Jul', revenue: 238000, trips: 59, profit: 59500 },
+        { month: 'Aug', revenue: 245000, trips: 61, profit: 61250 },
+        { month: 'Sep', revenue: 252000, trips: 63, profit: 63000 },
+        { month: 'Oct', revenue: 268000, trips: 67, profit: 67000 },
+        { month: 'Nov', revenue: 275000, trips: 69, profit: 68750 },
+        { month: 'Dec', revenue: 295000, trips: 74, profit: 73750 }
+    ],
+    expenses: {
+        fuel: { amount: 450000, percentage: 35.2, change: 8.5 },
+        maintenance: { amount: 180000, percentage: 14.1, change: -3.2 },
+        salaries: { amount: 320000, percentage: 25.0, change: 2.8 },
+        insurance: { amount: 95000, percentage: 7.4, change: 1.2 },
+        permits: { amount: 45000, percentage: 3.5, change: -0.8 },
+        other: { amount: 186000, percentage: 14.8, change: 4.1 }
+    }
+};
+const reportsData = [
+    {
+        id: 'RPT001',
+        name: 'Monthly Revenue Summary',
+        type: 'Financial',
+        lastGenerated: '2024-01-10',
+        frequency: 'Monthly',
+        status: 'Ready',
+        size: '2.4 MB',
+        format: 'PDF'
+    },
+    {
+        id: 'RPT002',
+        name: 'Route Performance Analysis',
+        type: 'Operations',
+        lastGenerated: '2024-01-09',
+        frequency: 'Weekly',
+        status: 'Processing',
+        size: '1.8 MB',
+        format: 'Excel'
+    },
+    {
+        id: 'RPT003',
+        name: 'Driver Performance Report',
+        type: 'HR',
+        lastGenerated: '2024-01-08',
+        frequency: 'Bi-weekly',
+        status: 'Ready',
+        size: '965 KB',
+        format: 'PDF'
+    },
+    {
+        id: 'RPT004',
+        name: 'Vehicle Utilization Report',
+        type: 'Fleet',
+        lastGenerated: '2024-01-07',
+        frequency: 'Weekly',
+        status: 'Ready',
+        size: '3.2 MB',
+        format: 'CSV'
+    }
+];
+const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+    }).format(amount);
+};
+const formatPercentage = (value) => {
+    return `${value >= 0 ? '+' : ''}${value.toFixed(1)}%`;
+};
+const getStatusColor = (status) => {
+    switch (status) {
+        case 'Ready': return 'bg-green-100 text-green-800';
+        case 'Processing': return 'bg-orange-100 text-orange-800';
+        case 'Failed': return 'bg-red-100 text-red-800';
+        default: return 'bg-gray-100 text-gray-800';
+    }
+};
+const getTransportIcon = (mode) => {
+    switch (mode.toLowerCase()) {
+        case 'road transport': return _jsx(Truck, { className: "h-4 w-4 text-green-600" });
+        case 'air transport': return _jsx(Plane, { className: "h-4 w-4 text-blue-600" });
+        case 'sea transport': return _jsx(Ship, { className: "h-4 w-4 text-teal-600" });
+        default: return _jsx(RouteIcon, { className: "h-4 w-4" });
+    }
+};
+export function RevenueModule() {
+    const [selectedPeriod, setSelectedPeriod] = useState('month');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [activeTab, setActiveTab] = useState('overview');
+    const filteredReports = reportsData.filter(report => report.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        report.type.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (_jsxs("div", { className: "p-6 space-y-6 bg-gray-50 min-h-screen", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx(DollarSign, { className: "h-6 w-6 text-green-600" }), _jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-semibold text-gray-900", children: "Revenue & Reports" }), _jsx("p", { className: "text-gray-600", children: "Financial analytics, performance metrics, and custom reports" })] })] }), _jsxs("div", { className: "flex gap-2", children: [_jsxs(Select, { value: selectedPeriod, onValueChange: setSelectedPeriod, children: [_jsx(SelectTrigger, { className: "w-32", children: _jsx(SelectValue, {}) }), _jsxs(SelectContent, { children: [_jsx(SelectItem, { value: "week", children: "This Week" }), _jsx(SelectItem, { value: "month", children: "This Month" }), _jsx(SelectItem, { value: "quarter", children: "This Quarter" }), _jsx(SelectItem, { value: "year", children: "This Year" })] })] }), _jsxs(Button, { variant: "outline", className: "flex items-center gap-2", children: [_jsx(RefreshCw, { className: "h-4 w-4" }), "Refresh"] }), _jsxs(Button, { className: "bg-green-600 hover:bg-green-700 flex items-center gap-2", children: [_jsx(Download, { className: "h-4 w-4" }), "Export Report"] })] })] }), _jsxs("div", { className: "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4", children: [_jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-2", children: [_jsx(DollarSign, { className: "h-4 w-4 text-green-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Total Revenue" })] }), _jsxs("div", { className: "flex items-center gap-1", children: [_jsx(ArrowUp, { className: "h-3 w-3 text-green-500" }), _jsx("span", { className: "text-xs text-green-600", children: formatPercentage(revenueData.overview.monthlyGrowth) })] })] }), _jsx("p", { className: "text-xl font-semibold mt-2", children: formatCurrency(revenueData.overview.totalRevenue) })] }), _jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx(BarChart3, { className: "h-4 w-4 text-blue-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Avg per Trip" })] }), _jsx("p", { className: "text-xl font-semibold", children: formatCurrency(revenueData.overview.avgRevenuePerTrip) })] }), _jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx(Target, { className: "h-4 w-4 text-purple-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Profit Margin" })] }), _jsxs("p", { className: "text-xl font-semibold text-purple-600", children: [revenueData.overview.profitMargin, "%"] })] }), _jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx(TrendingUp, { className: "h-4 w-4 text-orange-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Target Progress" })] }), _jsxs("p", { className: "text-xl font-semibold", children: [revenueData.overview.targetProgress, "%"] }), _jsx(Progress, { value: revenueData.overview.targetProgress, className: "h-1 mt-2" })] }), _jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx(RouteIcon, { className: "h-4 w-4 text-indigo-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Active Routes" })] }), _jsx("p", { className: "text-xl font-semibold", children: "24" })] }), _jsxs(Card, { className: "p-4 border-0 shadow-sm", children: [_jsxs("div", { className: "flex items-center gap-2 mb-2", children: [_jsx(Users, { className: "h-4 w-4 text-teal-600" }), _jsx("span", { className: "text-sm text-gray-600", children: "Active Drivers" })] }), _jsx("p", { className: "text-xl font-semibold", children: "156" })] })] }), _jsxs(Tabs, { value: activeTab, onValueChange: setActiveTab, className: "w-full", children: [_jsxs(TabsList, { children: [_jsx(TabsTrigger, { value: "overview", children: "Revenue Overview" }), _jsx(TabsTrigger, { value: "analysis", children: "Detailed Analysis" }), _jsx(TabsTrigger, { value: "reports", children: "Custom Reports" }), _jsx(TabsTrigger, { value: "forecasting", children: "Forecasting" })] }), _jsx(TabsContent, { value: "overview", className: "mt-6", children: _jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-2 gap-6", children: [_jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Revenue by Transport Mode" }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-4", children: revenueData.byTransportMode.map((mode, index) => (_jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-2", children: [getTransportIcon(mode.mode), _jsx("span", { className: "font-medium", children: mode.mode })] }), _jsxs("div", { className: "text-right", children: [_jsx("p", { className: "font-semibold", children: formatCurrency(mode.revenue) }), _jsxs("div", { className: "flex items-center gap-1", children: [mode.growth >= 0 ? (_jsx(ArrowUp, { className: "h-3 w-3 text-green-500" })) : (_jsx(ArrowDown, { className: "h-3 w-3 text-red-500" })), _jsx("span", { className: `text-xs ${mode.growth >= 0 ? 'text-green-600' : 'text-red-600'}`, children: formatPercentage(mode.growth) })] })] })] }), _jsx("div", { className: "w-full bg-gray-200 rounded-full h-2", children: _jsx("div", { className: "bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full", style: { width: `${mode.percentage}%` } }) }), _jsxs("div", { className: "flex justify-between text-sm text-gray-600", children: [_jsxs("span", { children: [mode.trips, " trips"] }), _jsxs("span", { children: ["Avg: ", formatCurrency(mode.avgRevenue)] })] })] }, index))) }) })] }), _jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Top Performing Routes" }) }), _jsx(CardContent, { children: _jsxs(Table, { children: [_jsx(TableHeader, { children: _jsxs(TableRow, { children: [_jsx(TableHead, { children: "Route" }), _jsx(TableHead, { children: "Revenue" }), _jsx(TableHead, { children: "Margin" }), _jsx(TableHead, { children: "Efficiency" })] }) }), _jsx(TableBody, { children: revenueData.byRoute.map((route, index) => (_jsxs(TableRow, { children: [_jsx(TableCell, { children: _jsxs("div", { children: [_jsx("p", { className: "font-medium", children: route.route }), _jsxs("p", { className: "text-sm text-gray-500", children: [route.trips, " trips"] })] }) }), _jsx(TableCell, { className: "font-medium text-green-600", children: formatCurrency(route.revenue) }), _jsx(TableCell, { children: _jsxs(Badge, { className: "bg-purple-100 text-purple-800", children: [route.profitMargin, "%"] }) }), _jsx(TableCell, { children: _jsxs("div", { className: "flex items-center gap-2", children: [_jsxs("span", { className: "text-sm", children: [route.efficiency, "%"] }), _jsx("div", { className: "w-12 bg-gray-200 rounded-full h-1", children: _jsx("div", { className: `h-1 rounded-full ${route.efficiency >= 95 ? 'bg-green-500' :
+                                                                                        route.efficiency >= 90 ? 'bg-yellow-500' : 'bg-red-500'}`, style: { width: `${route.efficiency}%` } }) })] }) })] }, index))) })] }) })] }), _jsxs(Card, { className: "border-0 shadow-sm xl:col-span-2", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Revenue Trend - Last 12 Months" }) }), _jsxs(CardContent, { children: [_jsx("div", { className: "h-64 flex items-end justify-between gap-2", children: revenueData.monthlyTrend.map((month, index) => (_jsxs("div", { className: "flex-1 flex flex-col items-center", children: [_jsx("div", { className: "w-full bg-gradient-to-t from-green-500 to-blue-500 rounded-t hover:opacity-80 transition-opacity cursor-pointer", style: { height: `${(month.revenue / 300000) * 100}%` }, title: `${month.month}: ${formatCurrency(month.revenue)}` }), _jsx("span", { className: "text-xs text-gray-600 mt-1", children: month.month })] }, index))) }), _jsxs("div", { className: "mt-4 grid grid-cols-3 gap-4 text-sm", children: [_jsxs("div", { className: "text-center", children: [_jsx("p", { className: "text-gray-600", children: "Total Revenue" }), _jsx("p", { className: "font-semibold", children: formatCurrency(revenueData.monthlyTrend.reduce((sum, m) => sum + m.revenue, 0)) })] }), _jsxs("div", { className: "text-center", children: [_jsx("p", { className: "text-gray-600", children: "Total Trips" }), _jsx("p", { className: "font-semibold", children: revenueData.monthlyTrend.reduce((sum, m) => sum + m.trips, 0) })] }), _jsxs("div", { className: "text-center", children: [_jsx("p", { className: "text-gray-600", children: "Total Profit" }), _jsx("p", { className: "font-semibold text-green-600", children: formatCurrency(revenueData.monthlyTrend.reduce((sum, m) => sum + m.profit, 0)) })] })] })] })] })] }) }), _jsx(TabsContent, { value: "analysis", className: "mt-6", children: _jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-2 gap-6", children: [_jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Expense Analysis" }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-4", children: Object.entries(revenueData.expenses).map(([category, data], index) => (_jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsx("span", { className: "font-medium capitalize", children: category }), _jsxs("div", { className: "text-right", children: [_jsx("p", { className: "font-semibold", children: formatCurrency(data.amount) }), _jsxs("div", { className: "flex items-center gap-1", children: [data.change >= 0 ? (_jsx(ArrowUp, { className: "h-3 w-3 text-red-500" })) : (_jsx(ArrowDown, { className: "h-3 w-3 text-green-500" })), _jsx("span", { className: `text-xs ${data.change >= 0 ? 'text-red-600' : 'text-green-600'}`, children: formatPercentage(data.change) })] })] })] }), _jsx("div", { className: "w-full bg-gray-200 rounded-full h-2", children: _jsx("div", { className: "bg-gradient-to-r from-red-400 to-orange-500 h-2 rounded-full", style: { width: `${data.percentage}%` } }) }), _jsxs("p", { className: "text-sm text-gray-600", children: [data.percentage, "% of total expenses"] })] }, index))) }) })] }), _jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Profitability by Route" }) }), _jsx(CardContent, { children: _jsx("div", { className: "space-y-4", children: revenueData.byRoute.map((route, index) => (_jsxs("div", { className: "p-4 border rounded-lg", children: [_jsxs("div", { className: "flex justify-between items-start mb-2", children: [_jsx("h4", { className: "font-medium", children: route.route }), _jsxs(Badge, { className: "bg-green-100 text-green-800", children: [route.profitMargin, "% margin"] })] }), _jsxs("div", { className: "grid grid-cols-3 gap-2 text-sm", children: [_jsxs("div", { children: [_jsx("p", { className: "text-gray-600", children: "Revenue" }), _jsx("p", { className: "font-semibold", children: formatCurrency(route.revenue) })] }), _jsxs("div", { children: [_jsx("p", { className: "text-gray-600", children: "Trips" }), _jsx("p", { className: "font-semibold", children: route.trips })] }), _jsxs("div", { children: [_jsx("p", { className: "text-gray-600", children: "Efficiency" }), _jsxs("p", { className: "font-semibold", children: [route.efficiency, "%"] })] })] })] }, index))) }) })] }), _jsxs(Card, { className: "border-0 shadow-sm xl:col-span-2", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "flex items-center gap-2", children: [_jsx(AlertCircle, { className: "h-5 w-5 text-orange-600" }), "Performance Alerts & Insights"] }) }), _jsx(CardContent, { children: _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: [_jsxs("div", { className: "bg-yellow-50 p-4 rounded-lg border border-yellow-200", children: [_jsx("h4", { className: "font-medium text-yellow-800 mb-2", children: "Fuel Cost Alert" }), _jsx("p", { className: "text-sm text-yellow-700", children: "Fuel expenses increased by 8.5% this month. Consider route optimization to reduce consumption." })] }), _jsxs("div", { className: "bg-green-50 p-4 rounded-lg border border-green-200", children: [_jsx("h4", { className: "font-medium text-green-800 mb-2", children: "Revenue Growth" }), _jsx("p", { className: "text-sm text-green-700", children: "Sea transport revenue up 18.7%. Expand capacity to capitalize on demand." })] }), _jsxs("div", { className: "bg-blue-50 p-4 rounded-lg border border-blue-200", children: [_jsx("h4", { className: "font-medium text-blue-800 mb-2", children: "Route Efficiency" }), _jsx("p", { className: "text-sm text-blue-700", children: "NY-Boston route achieving 94% efficiency. Best practices can be applied to other routes." })] }), _jsxs("div", { className: "bg-red-50 p-4 rounded-lg border border-red-200", children: [_jsx("h4", { className: "font-medium text-red-800 mb-2", children: "Air Transport Decline" }), _jsx("p", { className: "text-sm text-red-700", children: "Air transport revenue down 2.1%. Review pricing strategy and customer satisfaction." })] })] }) })] })] }) }), _jsx(TabsContent, { value: "reports", className: "mt-6", children: _jsxs("div", { className: "space-y-6", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-4", children: [_jsxs("div", { className: "relative", children: [_jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" }), _jsx(Input, { placeholder: "Search reports...", value: searchTerm, onChange: (e) => setSearchTerm(e.target.value), className: "pl-10 w-64" })] }), _jsxs(Select, { defaultValue: "all", children: [_jsx(SelectTrigger, { className: "w-32", children: _jsx(SelectValue, {}) }), _jsxs(SelectContent, { children: [_jsx(SelectItem, { value: "all", children: "All Types" }), _jsx(SelectItem, { value: "financial", children: "Financial" }), _jsx(SelectItem, { value: "operations", children: "Operations" }), _jsx(SelectItem, { value: "hr", children: "HR" }), _jsx(SelectItem, { value: "fleet", children: "Fleet" })] })] })] }), _jsxs(Button, { className: "bg-green-600 hover:bg-green-700", children: [_jsx(FileText, { className: "h-4 w-4 mr-1" }), "Generate Report"] })] }), _jsx(Card, { className: "border-0 shadow-sm", children: _jsx(CardContent, { className: "p-0", children: _jsxs(Table, { children: [_jsx(TableHeader, { children: _jsxs(TableRow, { children: [_jsx(TableHead, { children: "Report Name" }), _jsx(TableHead, { children: "Type" }), _jsx(TableHead, { children: "Last Generated" }), _jsx(TableHead, { children: "Frequency" }), _jsx(TableHead, { children: "Status" }), _jsx(TableHead, { children: "Size" }), _jsx(TableHead, { children: "Actions" })] }) }), _jsx(TableBody, { children: filteredReports.map((report) => (_jsxs(TableRow, { children: [_jsx(TableCell, { className: "font-medium", children: report.name }), _jsx(TableCell, { children: _jsx(Badge, { variant: "outline", children: report.type }) }), _jsx(TableCell, { children: report.lastGenerated }), _jsx(TableCell, { children: report.frequency }), _jsx(TableCell, { children: _jsx(Badge, { className: getStatusColor(report.status), children: report.status }) }), _jsx(TableCell, { children: report.size }), _jsx(TableCell, { children: _jsxs("div", { className: "flex gap-1", children: [_jsx(Button, { size: "sm", variant: "outline", children: _jsx(Download, { className: "h-3 w-3" }) }), _jsx(Button, { size: "sm", variant: "outline", children: "View" })] }) })] }, report.id))) })] }) }) }), _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4", children: [_jsx(Card, { className: "border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow", children: _jsxs(CardContent, { className: "p-6 text-center", children: [_jsx(BarChart3, { className: "h-8 w-8 text-blue-600 mx-auto mb-2" }), _jsx("h4", { className: "font-medium", children: "Revenue Summary" }), _jsx("p", { className: "text-sm text-gray-600 mt-1", children: "Generate monthly revenue overview" }), _jsx(Button, { size: "sm", className: "mt-3 w-full", children: "Generate" })] }) }), _jsx(Card, { className: "border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow", children: _jsxs(CardContent, { className: "p-6 text-center", children: [_jsx(PieChart, { className: "h-8 w-8 text-green-600 mx-auto mb-2" }), _jsx("h4", { className: "font-medium", children: "Cost Analysis" }), _jsx("p", { className: "text-sm text-gray-600 mt-1", children: "Detailed expense breakdown report" }), _jsx(Button, { size: "sm", className: "mt-3 w-full", children: "Generate" })] }) }), _jsx(Card, { className: "border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow", children: _jsxs(CardContent, { className: "p-6 text-center", children: [_jsx(TrendingUp, { className: "h-8 w-8 text-purple-600 mx-auto mb-2" }), _jsx("h4", { className: "font-medium", children: "Performance Trends" }), _jsx("p", { className: "text-sm text-gray-600 mt-1", children: "Route and driver performance analysis" }), _jsx(Button, { size: "sm", className: "mt-3 w-full", children: "Generate" })] }) })] })] }) }), _jsx(TabsContent, { value: "forecasting", className: "mt-6", children: _jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-2 gap-6", children: [_jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Revenue Forecast" }) }), _jsx(CardContent, { children: _jsxs("div", { className: "space-y-4", children: [_jsxs("div", { className: "bg-blue-50 p-4 rounded-lg border border-blue-200", children: [_jsx("h4", { className: "font-medium text-blue-800 mb-2", children: "Next Quarter Projection" }), _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex justify-between", children: [_jsx("span", { children: "Projected Revenue:" }), _jsx("span", { className: "font-semibold", children: formatCurrency(890000) })] }), _jsxs("div", { className: "flex justify-between", children: [_jsx("span", { children: "Growth Rate:" }), _jsx("span", { className: "font-semibold text-green-600", children: "+12.3%" })] }), _jsxs("div", { className: "flex justify-between", children: [_jsx("span", { children: "Confidence Level:" }), _jsx("span", { className: "font-semibold", children: "87%" })] })] })] }), _jsxs("div", { className: "space-y-3", children: [_jsx("h5", { className: "font-medium", children: "Forecast by Transport Mode:" }), revenueData.byTransportMode.map((mode, index) => (_jsxs("div", { className: "flex justify-between items-center p-2 bg-gray-50 rounded", children: [_jsxs("div", { className: "flex items-center gap-2", children: [getTransportIcon(mode.mode), _jsx("span", { className: "text-sm", children: mode.mode })] }), _jsx("span", { className: "font-medium", children: formatCurrency(mode.revenue * 1.123) })] }, index)))] })] }) })] }), _jsxs(Card, { className: "border-0 shadow-sm", children: [_jsx(CardHeader, { children: _jsx(CardTitle, { children: "Market Trends & Insights" }) }), _jsx(CardContent, { children: _jsxs("div", { className: "space-y-4", children: [_jsxs("div", { className: "border-l-4 border-green-500 pl-4", children: [_jsx("h4", { className: "font-medium text-green-800", children: "Growth Opportunity" }), _jsx("p", { className: "text-sm text-gray-700 mt-1", children: "E-commerce growth driving 15% increase in last-mile delivery demand." })] }), _jsxs("div", { className: "border-l-4 border-orange-500 pl-4", children: [_jsx("h4", { className: "font-medium text-orange-800", children: "Market Risk" }), _jsx("p", { className: "text-sm text-gray-700 mt-1", children: "Fuel price volatility may impact margins by 3-5% next quarter." })] }), _jsxs("div", { className: "border-l-4 border-blue-500 pl-4", children: [_jsx("h4", { className: "font-medium text-blue-800", children: "Technology Impact" }), _jsx("p", { className: "text-sm text-gray-700 mt-1", children: "Route optimization could improve efficiency by 8-12%." })] }), _jsxs("div", { className: "border-l-4 border-purple-500 pl-4", children: [_jsx("h4", { className: "font-medium text-purple-800", children: "Seasonal Pattern" }), _jsx("p", { className: "text-sm text-gray-700 mt-1", children: "Q4 typically shows 20% revenue increase due to holiday shipping." })] })] }) })] })] }) })] })] }));
+}
+//# sourceMappingURL=RevenueModule.js.map

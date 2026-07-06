@@ -1,0 +1,8 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { ArrowRight } from 'lucide-react';
+export function ModulePlaceholder({ title, description, icon, features }) {
+    return (_jsx("div", { className: "p-6 bg-gray-50 min-h-screen", children: _jsxs("div", { className: "max-w-4xl mx-auto", children: [_jsxs("div", { className: "mb-8", children: [_jsxs("div", { className: "flex items-center gap-3 mb-2", children: [icon, _jsx("h1", { className: "text-2xl font-bold text-gray-900", children: title })] }), _jsx("p", { className: "text-gray-600", children: description })] }), _jsxs(Card, { className: "border-gray-200", children: [_jsx(CardHeader, { className: "text-center pb-4", children: _jsx(CardTitle, { className: "text-xl text-gray-900", children: "Module Under Development" }) }), _jsxs(CardContent, { className: "text-center space-y-6", children: [_jsx("p", { className: "text-gray-600 text-lg", children: "This module is currently being developed and will include:" }), _jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4 my-6", children: features.map((feature, index) => (_jsxs("div", { className: "flex items-center gap-2 text-left", children: [_jsx(ArrowRight, { className: "h-4 w-4 text-blue-600 flex-shrink-0" }), _jsx("span", { className: "text-gray-700", children: feature })] }, index))) }), _jsx("div", { className: "pt-4", children: _jsx(Button, { variant: "outline", size: "lg", className: "border-blue-200 text-blue-700 hover:bg-blue-50", children: "Return to Dashboard" }) })] })] })] }) }));
+}
+//# sourceMappingURL=ModulePlaceholder.js.map
