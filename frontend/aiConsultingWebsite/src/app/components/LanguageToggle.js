@@ -3,7 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "./ui/button";
-import { useLanguage, languages, Language } from "./LanguageProvider";
+import { useLanguage, languages } from "./LanguageProvider";
 import { useDarkMode } from "./DarkModeProvider";
 export function LanguageToggle() {
     const [isOpen, setIsOpen] = useState(false);

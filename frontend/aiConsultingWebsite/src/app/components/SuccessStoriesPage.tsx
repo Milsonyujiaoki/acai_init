@@ -252,7 +252,7 @@ const videoTestimonials: VideoTestimonial[] = [
     author: "Budi Santoso",
     role: "Head of Operations",
     industry: "Manufacturing",
-    thumbnail: "/api/placeholder/400/225",
+    thumbnail: "https://via.placeholder.com/400x225.png?text=Video+Thumbnail",
     duration: "3:45",
     videoUrl: "#",
     quote: "Delibix's AI system transformed our quality control process completely."
@@ -263,7 +263,7 @@ const videoTestimonials: VideoTestimonial[] = [
     author: "Dr. Sari Wijaya",
     role: "Chief Risk Officer",
     industry: "Financial Services",
-    thumbnail: "/api/placeholder/400/225",
+    thumbnail: "https://via.placeholder.com/400x225.png?text=Video+Thumbnail",
     duration: "4:12",
     videoUrl: "#",
     quote: "Our fraud detection accuracy improved by 95% in just 4 months."
@@ -274,7 +274,7 @@ const videoTestimonials: VideoTestimonial[] = [
     author: "Dr. Indira Kusuma",
     role: "Chief Medical Officer",
     industry: "Healthcare",
-    thumbnail: "/api/placeholder/400/225",
+    thumbnail: "https://via.placeholder.com/400x225.png?text=Video+Thumbnail",
     duration: "5:30",
     videoUrl: "#",
     quote: "Patient outcomes have never been better since implementing AI diagnostics."

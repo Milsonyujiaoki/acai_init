@@ -31,7 +31,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Founder & CEO',
       department: 'Leadership',
       location: 'Yogyakarta, Indonesia',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Visionary leader with 10+ years in AI and digital transformation. Passionate about democratizing AI for businesses worldwide.',
       expertise: ['AI Strategy', 'Business Development', 'Digital Transformation'],
       achievements: [
@@ -53,7 +53,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Chief Technology Officer',
       department: 'Engineering',
       location: 'Remote',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Former Google AI researcher specializing in large language models and neural architecture. Leading our AGI development.',
       expertise: ['Machine Learning', 'AI Architecture', 'Distributed Systems'],
       achievements: [
@@ -75,7 +75,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Head of Design',
       department: 'Design',
       location: 'Yogyakarta, Indonesia',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Award-winning designer with expertise in AI/UX interface design. Creates intuitive experiences for complex AI systems.',
       expertise: ['UI/UX Design', 'Design Systems', 'User Research'],
       achievements: [
@@ -97,7 +97,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Lead Engineer',
       department: 'Engineering',
       location: 'Remote',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Full-stack architect building scalable AI infrastructure. Passionate about clean code and system optimization.',
       expertise: ['Full-Stack Development', 'Cloud Architecture', 'DevOps'],
       achievements: [
@@ -119,7 +119,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Marketing Director',
       department: 'Marketing',
       location: 'Singapore',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Growth marketing expert with deep understanding of AI market dynamics. Drives global brand awareness and adoption.',
       expertise: ['Growth Marketing', 'Brand Strategy', 'Content Marketing'],
       achievements: [
@@ -141,7 +141,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Senior Data Scientist',
       department: 'Data',
       location: 'Remote',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'ML researcher focused on ethical AI and bias detection. Ensures our AI systems are fair and transparent.',
       expertise: ['Machine Learning', 'AI Ethics', 'Statistical Analysis'],
       achievements: [
@@ -163,7 +163,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'VP Business Development',
       department: 'Sales',
       location: 'Remote',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Strategic partnerships expert connecting enterprises with AI solutions. Building bridges between technology and business.',
       expertise: ['Strategic Partnerships', 'Enterprise Sales', 'Market Expansion'],
       achievements: [
@@ -184,7 +184,7 @@ export function TeamPage({ navigate }: TeamPageProps) {
       role: 'Head of Operations',
       department: 'Operations',
       location: 'Remote',
-      image: '/api/placeholder/400/400',
+      image: 'https://via.placeholder.com/400x400.png?text=Team+Member',
       bio: 'Operations strategist optimizing workflows and scaling teams globally. Ensures smooth execution of our ambitious goals.',
       expertise: ['Operations Strategy', 'Process Optimization', 'Team Management'],
       achievements: [

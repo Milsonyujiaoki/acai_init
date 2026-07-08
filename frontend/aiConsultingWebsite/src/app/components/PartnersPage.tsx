@@ -32,7 +32,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Technology Partner',
       tier: 'Premier',
       region: 'Global',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://cloud.google.com',
       description: 'Leading cloud infrastructure and AI platform provider',
       partnership: {
@@ -62,7 +62,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Consulting Partner',
       tier: 'Strategic',
       region: 'Indonesia',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://accenture.com',
       description: 'Global management consulting and technology services company',
       partnership: {
@@ -92,7 +92,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Academic Partner',
       tier: 'Research',
       region: 'Indonesia',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://ugm.ac.id',
       description: 'Leading research university in Indonesia with strong AI/ML programs',
       partnership: {
@@ -122,7 +122,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Accelerator Partner',
       tier: 'Growth',
       region: 'Global',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://techstars.com',
       description: 'Global startup accelerator with strong focus on AI and emerging technologies',
       partnership: {
@@ -152,7 +152,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Technology Partner',
       tier: 'Certified',
       region: 'Global',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://salesforce.com',
       description: 'Leading CRM platform with extensive AI integration capabilities',
       partnership: {
@@ -182,7 +182,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Government Partner',
       tier: 'Public Sector',
       region: 'Indonesia',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://jogjaprov.go.id',
       description: 'Yogyakarta Provincial Government - Smart City and Digital Transformation',
       partnership: {
@@ -212,7 +212,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Financial Partner',
       tier: 'Verified',
       region: 'Global',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://stripe.com',
       description: 'Global payment processing platform enabling seamless financial transactions',
       partnership: {
@@ -242,7 +242,7 @@ export function PartnersPage({ navigate }: PartnersPageProps) {
       type: 'Marketing Partner',
       tier: 'Preferred',
       region: 'Indonesia',
-      logo: '/api/placeholder/200/80',
+      logo: 'https://via.placeholder.com/200x80.png?text=Partner+Logo',
       website: 'https://wpp.com',
       description: 'Leading marketing and communications agency with AI-driven campaigns',
       partnership: {

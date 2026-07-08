@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "./ui/button";
-import { useLanguage, languages, Language } from "./LanguageProvider";
+import { useLanguage, languages } from "./LanguageProvider";
+
+type Language = keyof typeof languages;
 import { useDarkMode } from "./DarkModeProvider";
 
 export function LanguageToggle() {

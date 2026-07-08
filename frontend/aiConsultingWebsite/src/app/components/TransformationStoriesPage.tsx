@@ -83,7 +83,7 @@ export function TransformationStoriesPage({ navigate }: TransformationStoriesPag
       testimonial: "Delibix transformed our entire supply chain. The AI solution delivered results beyond our expectations, saving millions annually.",
       clientName: "Dr. Sarah Wijaya",
       clientRole: "Chief Operations Officer",
-      image: "/api/placeholder/600/400",
+      image: "https://via.placeholder.com/600x400.png?text=Transformation+Story",
       timeline: [
         { phase: "Discovery", duration: "4 weeks", status: "completed" },
         { phase: "Design", duration: "6 weeks", status: "completed" },
@@ -114,7 +114,7 @@ export function TransformationStoriesPage({ navigate }: TransformationStoriesPag
       testimonial: "The digital transformation exceeded all our targets. Customer satisfaction and digital adoption rates have soared.",
       clientName: "Budi Santoso",
       clientRole: "Head of Digital Innovation",
-      image: "/api/placeholder/600/400",
+      image: "https://via.placeholder.com/600x400.png?text=Transformation+Story",
       timeline: [
         { phase: "Strategy", duration: "6 weeks", status: "completed" },
         { phase: "Development", duration: "32 weeks", status: "completed" },
@@ -145,7 +145,7 @@ export function TransformationStoriesPage({ navigate }: TransformationStoriesPag
       testimonial: "The smart factory implementation revolutionized our operations. Efficiency gains have been remarkable.",
       clientName: "Teguh Wijayanto", 
       clientRole: "Manufacturing Director",
-      image: "/api/placeholder/600/400",
+      image: "https://via.placeholder.com/600x400.png?text=Transformation+Story",
       timeline: [
         { phase: "Assessment", duration: "4 weeks", status: "completed" },
         { phase: "IoT Deployment", duration: "24 weeks", status: "completed" },
